@@ -33,12 +33,10 @@ public class LionService {
     }
 
     // Update
-    public Lion updateLion(Long id, int age, double weight, int kills) {
+    public Lion updateLion(Long id, Lion lion) {
         Lion savedLion = lionRepository.findById(id).orElseThrow(() ->
                 new LionNotFoundException("No lion found with id: " + id));
-        savedLion.setAge(age);
-        savedLion.setWeight(weight);
-        savedLion.setKills(kills);
+        lion.setId(id);
         return lionRepository.save(savedLion);
     }
 
