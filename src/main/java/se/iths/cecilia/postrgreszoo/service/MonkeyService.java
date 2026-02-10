@@ -42,6 +42,7 @@ public class MonkeyService {
     }
 
     public void deleteMonkey(long id) {
+        monkeyRepository.findById(id).orElseThrow(()-> new MonkeyNotFoundException("Monkey with id " + id + " not found"));
         monkeyRepository.deleteById(id);
     }
 
