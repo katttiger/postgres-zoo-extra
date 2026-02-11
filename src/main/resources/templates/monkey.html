@@ -8,11 +8,36 @@
 
 <h1>Monkey's page</h1>
 <p>Meet our monkey called <b><span th:text="${monkey.name}"></span></b></p>
+<div>
 
-<span th:text="${monkey.name}">Name: </span>
-<span th:text="${monkey.type}">Type: </span>
-<span th:text="${monkey.originCountry}">Country:  </span>
-<span th:text="${monkey.currentHabitat}">Current habitat: </span>
+    <div>
+        <label><b>Name: </b></label>
+        <span th:text="${monkey.name}">Name: </span>
+    </div>
+
+    <div>
+        <label><b>Type: </b></label>
+        <span th:text="${monkey.type}">Type: </span>
+    </div>
+
+    <div>
+        <label><b>Country of origin: </b></label>
+        <span th:text="${monkey.originCountry}">Country: </span>
+    </div>
+
+    <div>
+        <label><b>Current habitat: </b></label>
+        <span th:text="${monkey.currentHabitat}">Current habitat: </span>
+    </div>
+</div>
+
+<br>
+
+<div>
+    <button>
+        <a th:href="@{/monkeys/}">Return to main</a>
+    </button>
+</div>
 
 </body>
 </html>

@@ -9,21 +9,21 @@
 <h1>Monkey's home page</h1>
 <p>Welcome to the jungle</p>
 
-<table>
-    <thead>
-    <th>Id</th>
-    <th>Name</th>
-    <th>Species</th>
-    <th>Country of origin</th>
-    <th>Current habitat</th>
-    </thead>
-    <tbody th:each="monkey : ${monkeys}">
-    <td th:text="${monkey.id}"></td>
-    <td th:text="${monkey.name}"></td>
-    <td th:text="${monkey.type}"></td>
-    <td th:text="${monkey.originCountry}"></td>
-    <td th:text="${monkey.currentHabitat}"></td>
-    </tbody>
-</table>
+<ol>
+    <li th:each="monkey : ${monkeys}">
+        <span th:text="${monkey.name}"> - </span>
+        <span> - <a th:href="@{/monkeys/{id}(id=${monkey.id})}">Read more</a>   -  </span>
+        <span><a th:href="@{/monkeys/{id}/update(id=${monkey.id})}">Update monkey</a>   -  </span>
+
+        <button>
+            <a th:href="@{/monkeys/{id}/delete(id=${monkey.id})}">Delete monkey</a>
+        </button>
+    </li>
+</ol>
+
+<div>
+    <button th:href="@{/monkeys/new}">Add a monkey</button>
+</div>
+
 </body>
 </html>

@@ -51,7 +51,7 @@ public class MonkeyController {
     @PutMapping("/{id}")
     public String updateMonkey(@PathVariable Long id, @ModelAttribute Monkey monkey) {
         monkeyService.updateMonkey(id, monkey);
-        return "redirect:/monkeys";
+        return "redirect:/monkeys/";
     }
 
     @GetMapping("/{id}/update")
