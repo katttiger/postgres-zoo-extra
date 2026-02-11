@@ -1,7 +1,7 @@
 package se.iths.cecilia.postrgreszoo.service;
 
 import org.springframework.stereotype.Service;
-import se.iths.cecilia.postrgreszoo.exception.MonkeyNotFoundException;
+import se.iths.cecilia.postrgreszoo.exception.monkeyexceptions.MonkeyNotFoundException;
 import se.iths.cecilia.postrgreszoo.model.Monkey;
 import se.iths.cecilia.postrgreszoo.repository.MonkeyRepository;
 import se.iths.cecilia.postrgreszoo.validator.MonkeyValidator;
