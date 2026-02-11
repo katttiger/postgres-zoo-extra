@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update monkey</title>
+</head>
+<body>
+<h1>Update monkey</h1>
+<p>Did you find something wrong with <span th:text="${monkey.name}"></span>?</p>
+
+<form method="post" th:action="@{/monkeys/{id}(id=${monkey.id})}">
+    <input type="hidden" name="_method" value="PUT">
+    <div>
+        <label>Name</label>
+        <input type="text" name="name" th:value="${monkey.name}">
+    </div>
+
+    <div>
+        <label>Species</label>
+        <input type="text" name="type" th:value="${monkey.type}"/>
+    </div>
+
+    <div>
+        <label>Country of origin</label>
+        <input type="text" name="originCountry" th:value="${monkey.originCountry}"/>
+    </div>
+
+    <div>
+        <label>Current habitat</label>
+        <input type="text" name="currentHabitat" th:value="${monkey.currentHabitat}">
+    </div>
+
+    <button type="submit">Submit adjustments</button>
+</form>
+
+</body>
+</html>

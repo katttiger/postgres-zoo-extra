@@ -2,9 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Lions Den</title>
 </head>
 <body>
+<h1>Lions</h1>
+<ul>
 
+    <li th:each="lion : ${lions}">
+        <span th:text="${lion.name}"></span>
+        <a th:href="@{/lions/{id}(id=${lion.id})}">Show information</a>
+        <span> - </span>
+        <a th:href="@{/lions/{id}/update(id=${lion.id})}">Update information</a>
+        <span> - </span>
+        <a th:href="@{/lions/{id}/delete(id=${lion.id})}">Delete</a>
+    </li>
+
+</ul>
 </body>
 </html>

@@ -1,54 +1,60 @@
 package se.iths.cecilia.postrgreszoo.controller;
 
-import jakarta.servlet.ServletConfig;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import se.iths.cecilia.postrgreszoo.model.Lion;
 import se.iths.cecilia.postrgreszoo.service.LionService;
 
 @Controller
-@RequestMapping("/lion")
+@RequestMapping("/lions")
 public class LionController {
 
-    // TODO, Inte klart :)
-
     private final LionService lionService;
-    private final ServletConfig servletConfig;
 
-    public LionController(LionService lionService, ServletConfig servletConfig) {
+    public LionController(LionService lionService) {
         this.lionService = lionService;
-        this.servletConfig = servletConfig;
     }
 
-    // Create
+    @PostMapping
+    public String createLion(@ModelAttribute Lion lion) {
+        lionService.createLion(lion);
+        return "redirect:/lions";
+    }
 
+    @GetMapping("/new")
+    public String showCreateForm() {
+        return "create-lion";
+    }
 
-    // Get by ID
     @GetMapping("/{id}")
     public String getLionById(@PathVariable Long id, Model model) {
         model.addAttribute("lion", lionService.getLionById(id));
         return "lion";
     }
 
-    // Get all
     @GetMapping
     public String getAllLions(Model model) {
         model.addAttribute("lions", lionService.getAllLions());
         return "lions";
     }
 
-    // Update
+    @PutMapping("/{id}")
     public String updateLion(@PathVariable Long id, @ModelAttribute Lion lion) {
         Lion updatedLion = lionService.updateLion(id, lion);
-        return "";
+        return "redirect:/lions";
     }
 
+    @GetMapping("/{id}/update")
+    public String showUpdateForm(@PathVariable Long id, Model model) {
+        Lion lion = lionService.getLionById(id);
+        model.addAttribute("lion", lion);
+        return "update-lion";
+    }
 
-    // Delete
-
-
+    @GetMapping("/{id}/delete")
+    public String deleteLion(@PathVariable Long id) {
+        lionService.deleteLion(id);
+        return "redirect:/lions";
+    }
 }

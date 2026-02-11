@@ -11,16 +11,15 @@ import java.util.List;
 @Service
 public class MonkeyService {
 
-    private MonkeyRepository monkeyRepository;
-
-    private MonkeyValidator monkeyValidator;
+    private final MonkeyRepository monkeyRepository;
+    private final MonkeyValidator monkeyValidator;
 
     public MonkeyService(MonkeyRepository monkeyRepository, MonkeyValidator monkeyValidator) {
         this.monkeyRepository = monkeyRepository;
         this.monkeyValidator = monkeyValidator;
     }
 
-    public List<Monkey> getMonkeys() {
+    public List<Monkey> getAllMonkeys() {
         return monkeyRepository.findAll();
     }
 
@@ -31,25 +30,15 @@ public class MonkeyService {
 
     public Monkey createMonkey(Monkey monkey) {
         verifyMonkey(monkey);
-        Monkey newMonkey = new Monkey();
-
-        newMonkey.setName(monkey.getName());
-        newMonkey.setCurrentHabitat(monkey.getCurrentHabitat());
-        newMonkey.setOriginCountry(monkey.getOriginCountry());
-        newMonkey.setType(monkey.getType());
-
         return monkeyRepository.save(monkey);
     }
 
     public Monkey updateMonkey(long id, Monkey monkey) {
-        Monkey currentMonkey = monkeyRepository.findById(id).orElseThrow(() -> new MonkeyNotFoundException("Monkey with id " + id + " not found"));
+        monkeyRepository.findById(id).orElseThrow(
+                () -> new MonkeyNotFoundException("Monkey with id " + id + " not found"));
         verifyMonkey(monkey);
         monkey.setId(id);
-        currentMonkey.setName(monkey.getName());
-        currentMonkey.setCurrentHabitat(monkey.getCurrentHabitat());
-        currentMonkey.setOriginCountry(monkey.getOriginCountry());
-        currentMonkey.setType(monkey.getType());
-        return monkeyRepository.save(currentMonkey);
+        return monkeyRepository.save(monkey);
     }
 
     public void deleteMonkey(long id) {
@@ -57,9 +46,7 @@ public class MonkeyService {
         monkeyRepository.deleteById(id);
     }
 
-
     private void verifyMonkey(Monkey monkey) {
-
         monkeyValidator.verifyThatNameIsNotEmpty(monkey);
         monkeyValidator.verifyThatNameIsNotNull(monkey);
         monkeyValidator.verifyThatMonkeyHasHabitat(monkey);

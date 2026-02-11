@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create monkey</title>
+</head>
+<body>
+<h1>Create monkey</h1>
+<p>Enter the values for your monkey.
+    <br> We are more than happy to take another monkey into our arms.</p>
+
+
+<form method="post" th:action="@{/monkeys/}">
+    <div>
+        <label>Name</label>
+        <input type="text" name="name" placeholder="Monkey name"/>
+    </div>
+
+    <div>
+        <label>Species</label>
+        <input type="text" name="type" placeholder="Species"/>
+    </div>
+
+    <div>
+        <label>Origin country</label>
+        <input type="text" name="originCountry" placeholder="Origin country"/>
+    </div>
+
+    <div>
+        <label>Current habitat</label>
+        <input type="text" name="currentHabitat" placeholder="Current habitat"/>
+    </div>
+    <button type="submit">Create monkey</button>
+</form>
+
+</body>
+</html>

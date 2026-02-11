@@ -1,4 +1,4 @@
-package se.iths.cecilia.postrgreszoo.exception;
+package se.iths.cecilia.postrgreszoo.exception.lionExceptions;
 
 public class LionNotFoundException extends RuntimeException {
 

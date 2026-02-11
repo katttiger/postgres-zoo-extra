@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Monkey's home page</title>
+</head>
+<body>
+
+<h1>Monkey's home page</h1>
+<p>Welcome to the jungle</p>
+
+<ol>
+    <li th:each="monkey : ${monkeys}">
+        <span th:text="${monkey.name}"> - </span>
+        <span> - <a th:href="@{/monkeys/{id}(id=${monkey.id})}">Read more</a>   -  </span>
+        <span><a th:href="@{/monkeys/{id}/update(id=${monkey.id})}">Update monkey</a>   -  </span>
+
+        <button>
+            <a th:href="@{/monkeys/{id}/delete(id=${monkey.id})}">Delete monkey</a>
+        </button>
+    </li>
+</ol>
+
+<div>
+    <button th:href="@{/monkeys/new}">Add a monkey</button>
+</div>
+
+</body>
+</html>
