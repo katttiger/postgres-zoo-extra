@@ -18,13 +18,18 @@ public class Wolf {
     @Column(name = "fur_color", nullable = false)
     private String furColor;
 
+    public enum HowlKey {
+        C, D, E, F, G, A, B
+    }
+
+    @Enumerated(EnumType.STRING)
     @Column(name = "howl_key", nullable = false)
-    private String howlKey;
+    private HowlKey howlKey;
 
     public Wolf() {
     }
 
-    public Wolf(Long id, int age, String name, String furColor, String howlKey) {
+    public Wolf(Long id, int age, String name, String furColor, HowlKey howlKey) {
         this.id = id;
         this.age = age;
         this.name = name;
@@ -64,11 +69,11 @@ public class Wolf {
         this.furColor = furColor;
     }
 
-    public String getHowlKey() {
+    public HowlKey getHowlKey() {
         return howlKey;
     }
 
-    public void setHowlKey(String howlKey) {
+    public void setHowlKey(HowlKey howlKey) {
         this.howlKey = howlKey;
     }
 }
