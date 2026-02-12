@@ -31,6 +31,14 @@ public class Lion {
         this.kills = kills;
     }
 
+    public Lion(Long id, String name, int age, double weight, int kills) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.weight = weight;
+        this.kills = kills;
+    }
+
     public Long getId() {
         return id;
     }
