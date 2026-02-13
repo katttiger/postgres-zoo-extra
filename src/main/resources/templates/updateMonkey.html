@@ -10,6 +10,7 @@
 
 <form method="post" th:action="@{/monkeys/{id}(id=${monkey.id})}">
     <input type="hidden" name="_method" value="PUT">
+    
     <div>
         <label>Name</label>
         <input type="text" name="name" th:value="${monkey.name}">

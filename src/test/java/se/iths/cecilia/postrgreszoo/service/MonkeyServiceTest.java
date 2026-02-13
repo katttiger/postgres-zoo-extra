@@ -55,7 +55,7 @@ class MonkeyServiceTest {
     @Test
     @DisplayName("All monkeys in database are returned")
     void getAllMonkeys() {
-        Mockito.when(monkeyService.getAllMonkeys()).thenReturn(monkeys);
+        Mockito.when(monkeyRepository.findAll()).thenReturn(monkeys);
         List<Monkey> monkeysReturned = monkeyService.getAllMonkeys();
         Assertions.assertEquals(monkeys, monkeysReturned);
     }
@@ -78,7 +78,6 @@ class MonkeyServiceTest {
     @Test
     @DisplayName("Assert that the monkey returned is the one expected")
     void getMonkeyReturnsTheOneExpected() {
-        //TODO: Make sure that a direct call to monkeyRepository is not needed to run the test
         Mockito.when(monkeyRepository.findById(1L)).thenReturn(Optional.of(monkey));
         Monkey monkeyReturned = monkeyService.getMonkey(1L);
         Assertions.assertEquals(monkey, monkeyReturned);
@@ -87,8 +86,7 @@ class MonkeyServiceTest {
     @Test
     @DisplayName("Throws MonkeyNotFoundException if monkey does not exist")
     void getMonkeyThrowsMonkeyNotFoundExceptionIfMonkeyDoesNotExist() {
-        //TODO: Make sure that a direct call to monkeyRepository is not needed to run the test
-        Mockito.when(monkeyRepository.findById(3L)).thenThrow(MonkeyNotFoundException.class);
+        Mockito.when(monkeyRepository.findById(3L)).thenReturn(Optional.empty());
         Assertions.assertThrows(MonkeyNotFoundException.class, () -> monkeyService.getMonkey(3L));
     }
 
@@ -101,67 +99,70 @@ class MonkeyServiceTest {
     }
 
     @Test
-    @DisplayName("Throws exception if origin country is emptu")
+    @DisplayName("Throws exception if origin country is empty")
     void createMonkeyThrowsExceptionIfNoOriginCountryIsGiven() {
         monkey.setOriginCountry("");
-        Mockito.when(monkeyService.createMonkey(monkey)).thenThrow(MonkeyNotFoundException.class);
-        Assertions.assertThrows(MonkeyNotFoundException.class, () -> monkeyService.createMonkey(monkey));
+        Mockito.doThrow(MonkeyHasNoCountryOfOriginException.class).when(monkeyValidator).verifyThatMonkeyHasOriginCountry(monkey);
+        Assertions.assertThrows(MonkeyHasNoCountryOfOriginException.class, () -> monkeyService.createMonkey(monkey));
     }
 
     @Test
     @DisplayName("Throws exception if monkey has no name")
     void createMonkeyThrowsExceptionIfMonkeyHasNoName() {
         monkey.setName("");
-        Mockito.when(monkeyService.createMonkey(monkey)).thenThrow(MonkeyNameIsEmptyException.class);
+        Mockito.doThrow(MonkeyNameIsEmptyException.class).when(monkeyValidator).verifyThatNameIsNotEmpty(monkey);
         Assertions.assertThrows(MonkeyNameIsEmptyException.class, () -> monkeyService.createMonkey(monkey));
-    }
-
-    @Test
-    @DisplayName("Throws exception if monkey has no type")
-    void createMonkeyThrowsExceptionIfMonkeyHasNoType() {
-        monkey.setType("");
-        Mockito.when(monkeyService.createMonkey(monkey)).thenThrow(MonkeyHasNoTypeException.class);
-        Assertions.assertThrows(MonkeyHasNoTypeException.class, () -> monkeyService.createMonkey(monkey));
-
     }
 
     @Test
     @DisplayName("Throws exception if monkey name is null")
     void createMonkeyThrowsExceptionIfMonkeyNameIsNull() {
         monkey.setName(null);
-        Mockito.when(monkeyService.createMonkey(monkey)).thenThrow(MonkeyNameIsNullException.class);
+        Mockito.doThrow(MonkeyNameIsNullException.class).when(monkeyValidator).verifyThatNameIsNotNull(monkey);
         Assertions.assertThrows(MonkeyNameIsNullException.class, () -> monkeyService.createMonkey(monkey));
+    }
+
+    @Test
+    @DisplayName("Throws exception if monkey has no type")
+    void createMonkeyThrowsExceptionIfMonkeyHasNoType() {
+        monkey.setType("");
+        Mockito.doThrow(MonkeyHasNoTypeException.class).when(monkeyValidator).verifyThatMonkeyHasType(monkey);
+        Assertions.assertThrows(MonkeyHasNoTypeException.class, () -> monkeyService.createMonkey(monkey));
     }
 
     @Test
     @DisplayName("Throws exception if monkey has no habitat")
     void createMonkeyThrowsExceptionIfMonkeyHasNoHabitat() {
         monkey.setCurrentHabitat("");
-        Mockito.when(monkeyService.createMonkey(monkey)).thenThrow(MonkeyHasNoHabitatException.class);
+        Mockito.doThrow(MonkeyHasNoHabitatException.class).when(monkeyValidator).verifyThatMonkeyHasHabitat(monkey);
         Assertions.assertThrows(MonkeyHasNoHabitatException.class, () -> monkeyService.createMonkey(monkey));
     }
 
     @Test
     @DisplayName("Monkey properties can be updated")
     void updateMonkey() {
-
-        //TODO: Make sure that a direct call to monkeyRepository is not needed to run the test
         Mockito.when(monkeyRepository.findById(1L)).thenReturn(Optional.of(monkey));
-        String oldHabitat = monkey.getCurrentHabitat();
+        Mockito.when(monkeyRepository.save(monkey)).thenReturn(monkey);
+
         monkey.setCurrentHabitat("R77");
-        Mockito.when(monkeyService.updateMonkey(1L, monkey)).thenReturn(monkey);
-        monkeyService.updateMonkey(1L, monkey);
-        Assertions.assertNotEquals(oldHabitat, monkey.getCurrentHabitat());
+        Monkey updatedMonkey = monkeyService.updateMonkey(1L, monkey);
+
+        Assertions.assertEquals("R77", updatedMonkey.getCurrentHabitat());
 
     }
 
     @Test
-    @DisplayName("Verify deleteById-method is called")
-    void deleteMonkey() {
-        //TODO: Make sure that a direct call to monkeyRepository is not needed to run the test
+    @DisplayName("Delete-method is called in repository")
+    void deleteMethodIsCalledInRepository() {
         Mockito.when(monkeyRepository.findById(1L)).thenReturn(Optional.of(monkey));
         monkeyService.deleteMonkey(1L);
         Mockito.verify(monkeyRepository).deleteById(1L);
     }
-    
+
+    @Test
+    @DisplayName("deleteMonkey thows MonkeyNotFoundException if monkey does not exist")
+    void deleteMonkeyThrowsMonkeyNotFoundExceptionIfMonkeyDoesNotExist() {
+        Mockito.when(monkeyRepository.findById(3L)).thenReturn(Optional.empty());
+        Assertions.assertThrows(MonkeyNotFoundException.class, () -> monkeyService.deleteMonkey(3L));
+    }
 }

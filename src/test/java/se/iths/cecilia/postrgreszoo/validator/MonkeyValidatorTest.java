@@ -4,10 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import se.iths.cecilia.postrgreszoo.exception.monkeyexceptions.MonkeyHasNoCountryOfOriginException;
-import se.iths.cecilia.postrgreszoo.exception.monkeyexceptions.MonkeyHasNoHabitatException;
-import se.iths.cecilia.postrgreszoo.exception.monkeyexceptions.MonkeyHasNoTypeException;
-import se.iths.cecilia.postrgreszoo.exception.monkeyexceptions.MonkeyNameIsEmptyException;
+import se.iths.cecilia.postrgreszoo.exception.monkeyexceptions.*;
 import se.iths.cecilia.postrgreszoo.model.Monkey;
 
 class MonkeyValidatorTest {
@@ -22,12 +19,19 @@ class MonkeyValidatorTest {
         monkeyValidator = new MonkeyValidator();
     }
 
- 
+
     @Test
     @DisplayName("Assert exception is thrown due to name being empty")
     void verifyThatNameIsNotEmpty() {
         monkey.setName("");
         Assertions.assertThrows(MonkeyNameIsEmptyException.class, () -> monkeyValidator.verifyThatNameIsNotEmpty(monkey));
+    }
+
+    @Test
+    @DisplayName("Assert exception is thrown due to name being null")
+    void verifyThrowsExceptionWhenNameIsNull() {
+        monkey.setName(null);
+        Assertions.assertThrows(MonkeyNameIsNullException.class, () -> monkeyValidator.verifyThatNameIsNotNull(monkey));
     }
 
     @Test

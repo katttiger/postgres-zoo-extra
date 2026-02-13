@@ -8,7 +8,7 @@ import se.iths.cecilia.postrgreszoo.model.Monkey;
 public class MonkeyValidator {
 
     public void verifyThatNameIsNotNull(Monkey monkey) {
-        if (monkey.getName().equals(null)) {
+        if (monkey.getName() == (null)) {
             throw new MonkeyNameIsNullException("Monkey name cannot be null.");
         }
     }
