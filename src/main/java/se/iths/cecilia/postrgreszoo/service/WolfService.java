@@ -18,20 +18,31 @@ public class WolfService {
         this.wolfValidator = wolfValidator;
     }
 
-    public List<Wolf> getAllWolves() {
-        return wolfRepository.findAll();
-    }
-
-    public Wolf createWolf(Wolf wolf) {
-        return wolfRepository.save(wolf);
-    }
-
     public Wolf getWolf(Long id) {
         return wolfRepository.findById(id)
                 .orElseThrow(() -> new WolfNotFoundException("No wolf with id " + id + "  found."));
     }
 
+    public List<Wolf> getAllWolves() {
+        return wolfRepository.findAll();
+    }
+
+    public void validateWolf(Wolf wolf) {
+        wolfValidator.verifyNameIsNotNullOrBlank(wolf);
+        wolfValidator.verifyAgeIsValid(wolf);
+        wolfValidator.verifyColorIsNotNullOrBlank(wolf);
+        wolfValidator.verifyHowlKeyIsValid(wolf);
+    }
+
+    public Wolf createWolf(Wolf wolf) {
+        validateWolf(wolf);
+        return wolfRepository.save(wolf);
+    }
+
     public Wolf updateWolf(Long id, Wolf wolf) {
+        wolfRepository.findById(id).
+                orElseThrow(() -> new WolfNotFoundException("No wolf with id " + id + " found."));
+        validateWolf(wolf);
         wolf.setId(id);
         return wolfRepository.save(wolf);
     }
