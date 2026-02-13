@@ -117,10 +117,4 @@ public class WolfServiceTest {
         verify(wolfRepository).findById(1L);
         verify(wolfRepository, never()).save(any());
     }
-
-    @Test
-    void invalidWolfNameShouldThrowException() {
-
-    }
-
 }
