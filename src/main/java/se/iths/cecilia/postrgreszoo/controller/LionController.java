@@ -41,7 +41,7 @@ public class LionController {
 
     @PutMapping("/{id}")
     public String updateLion(@PathVariable Long id, @ModelAttribute Lion lion) {
-        Lion updatedLion = lionService.updateLion(id, lion);
+        lionService.updateLion(id, lion);
         return "redirect:/lions";
     }
 
