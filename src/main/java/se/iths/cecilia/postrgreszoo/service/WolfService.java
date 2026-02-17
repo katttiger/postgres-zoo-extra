@@ -1,7 +1,7 @@
 package se.iths.cecilia.postrgreszoo.service;
 
 import org.springframework.stereotype.Service;
-import se.iths.cecilia.postrgreszoo.exception.WolfNotFoundException;
+import se.iths.cecilia.postrgreszoo.exception.wolfexceptions.WolfNotFoundException;
 import se.iths.cecilia.postrgreszoo.model.Wolf;
 import se.iths.cecilia.postrgreszoo.repository.WolfRepository;
 import se.iths.cecilia.postrgreszoo.validator.WolfValidator;

@@ -5,7 +5,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import se.iths.cecilia.postrgreszoo.exception.WolfNotFoundException;
+import se.iths.cecilia.postrgreszoo.exception.wolfexceptions.WolfNotFoundException;
 import se.iths.cecilia.postrgreszoo.model.Wolf;
 import se.iths.cecilia.postrgreszoo.repository.WolfRepository;
 import se.iths.cecilia.postrgreszoo.validator.WolfValidator;

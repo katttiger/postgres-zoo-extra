@@ -1,4 +1,4 @@
-package se.iths.cecilia.postrgreszoo.exception;
+package se.iths.cecilia.postrgreszoo.exception.wolfexceptions;
 
 public class WolfInvalidHowlKeyException extends RuntimeException {
     public WolfInvalidHowlKeyException(String message) {

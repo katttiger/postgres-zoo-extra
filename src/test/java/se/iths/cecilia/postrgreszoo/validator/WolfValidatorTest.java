@@ -2,10 +2,10 @@ package se.iths.cecilia.postrgreszoo.validator;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import se.iths.cecilia.postrgreszoo.exception.WolfInvalidAgeException;
-import se.iths.cecilia.postrgreszoo.exception.WolfInvalidColorException;
-import se.iths.cecilia.postrgreszoo.exception.WolfInvalidHowlKeyException;
-import se.iths.cecilia.postrgreszoo.exception.WolfInvalidNameException;
+import se.iths.cecilia.postrgreszoo.exception.wolfexceptions.WolfInvalidAgeException;
+import se.iths.cecilia.postrgreszoo.exception.wolfexceptions.WolfInvalidColorException;
+import se.iths.cecilia.postrgreszoo.exception.wolfexceptions.WolfInvalidHowlKeyException;
+import se.iths.cecilia.postrgreszoo.exception.wolfexceptions.WolfInvalidNameException;
 import se.iths.cecilia.postrgreszoo.model.Wolf;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;

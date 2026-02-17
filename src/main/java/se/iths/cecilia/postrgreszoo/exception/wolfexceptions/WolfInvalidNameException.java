@@ -1,4 +1,4 @@
-package se.iths.cecilia.postrgreszoo.exception;
+package se.iths.cecilia.postrgreszoo.exception.wolfexceptions;
 
 public class WolfInvalidNameException extends RuntimeException {
     public WolfInvalidNameException(String message) {
