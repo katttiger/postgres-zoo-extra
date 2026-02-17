@@ -36,6 +36,7 @@ public class WolfService {
 
     public Wolf createWolf(Wolf wolf) {
         validateWolf(wolf);
+        System.out.println("Create method");
         return wolfRepository.save(wolf);
     }
 
