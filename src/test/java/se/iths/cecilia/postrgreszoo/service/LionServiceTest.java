@@ -79,7 +79,7 @@ public class LionServiceTest {
         Lion result = lionService.updateLion(1L, updatedLion);
 
         Mockito.verify(lionRepository).findById(1L);
-        Mockito.verify(lionValidator).validate(updatedLion);
+        Mockito.verify(lionValidator).validateUpdate(updatedLion);
         Mockito.verify(lionRepository).save(existingLion);
 
         assertEquals(16, result.getAge());

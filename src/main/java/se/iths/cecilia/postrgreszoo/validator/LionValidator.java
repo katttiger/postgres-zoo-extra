@@ -14,6 +14,12 @@ public class LionValidator {
         verifyKills(lion.getKills());
     }
 
+    public void validateUpdate(Lion lion) {
+        verifyAge(lion.getAge());
+        verifyWeight(lion.getWeight());
+        verifyKills(lion.getKills());
+    }
+
     public void verifyName(String name) {
         if (name == null) {
             throw new LionNameIsNullException("Name cant be null");
