@@ -37,7 +37,7 @@ public class MonkeyController {
         return "redirect:/monkeys/";
     }
 
-    @GetMapping("/new")
+    @GetMapping("/new/")
     public String showCreateForm(Model model) {
         return "createMonkey";
     }
