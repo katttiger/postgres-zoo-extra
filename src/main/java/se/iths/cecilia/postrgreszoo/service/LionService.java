@@ -39,7 +39,7 @@ public class LionService {
         Lion savedLion = lionRepository.findById(id).orElseThrow(() ->
                 new LionNotFoundException("No lion found with id: " + id));
 
-        lionValidator.validate(updatedLion);
+        lionValidator.validateUpdate(updatedLion);
 
         savedLion.setAge(updatedLion.getAge());
         savedLion.setWeight(updatedLion.getWeight());
