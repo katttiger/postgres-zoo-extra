@@ -34,4 +34,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: axsty/postrgres-zoo-1.0.0:dev
+          tags: axsty/postrgres-zoo-1.0.0:1.0.0
