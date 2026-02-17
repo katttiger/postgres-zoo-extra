@@ -58,6 +58,7 @@ public class WolfController {
     @DeleteMapping("/{id}/delete")
     public String deleteWolf(@PathVariable Long id) {
         wolfService.deleteWolf(id);
+        System.out.println("Delete method");
         return "redirect:/wolf";
     }
 
