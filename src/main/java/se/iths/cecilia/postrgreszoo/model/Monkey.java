@@ -6,19 +6,19 @@ import jakarta.persistence.*;
 public class Monkey {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="monkey_name", nullable = false)
+    @Column(name = "monkey_name", nullable = false)
     private String name;
 
-    @Column(name="type_of_monkey", nullable = false)
+    @Column(name = "type_of_monkey", nullable = false)
     private String type;
 
-    @Column(name="country_of_origin", nullable = false)
+    @Column(name = "country_of_origin", nullable = false)
     private String originCountry;
 
-    @Column(name="current_habitat", nullable = false)
+    @Column(name = "current_habitat", nullable = false)
     private String currentHabitat;
 
     public Monkey() {
