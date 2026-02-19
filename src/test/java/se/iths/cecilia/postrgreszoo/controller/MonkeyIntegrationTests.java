@@ -55,13 +55,12 @@ public class MonkeyIntegrationTests {
         Monkey monkey = new Monkey("John", "Gorilla", "Angola", "Y22");
         monkeyRepository.save(monkey);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/monkeys/1")
+        mockMvc.perform(MockMvcRequestBuilders.get("/monkeys/" + monkey.getId())
                         .characterEncoding("UTF-8"))
                 .andExpect(status().isOk());
 
         List<Monkey> monkeys = monkeyRepository.findAll();
         Monkey monkeyReturned = monkeys.get(0);
-
 
         List<Boolean> monkeyChecks = new ArrayList<>();
         monkeyChecks.add(monkey.getName().equals(monkeyReturned.getName()));
