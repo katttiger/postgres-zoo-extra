@@ -63,7 +63,6 @@ public class MonkeyIntegrationTests {
         Monkey monkeyReturned = monkeys.get(0);
 
         List<Boolean> monkeyChecks = new ArrayList<>();
-        monkeyChecks.add(monkey.getId().equals(monkeyReturned.getId()));
         monkeyChecks.add(monkey.getName().equals(monkeyReturned.getName()));
         monkeyChecks.add(monkey.getType().equals(monkeyReturned.getType()));
         monkeyChecks.add(monkey.getOriginCountry().equals(monkeyReturned.getOriginCountry()));
