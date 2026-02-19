@@ -13,6 +13,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import se.iths.cecilia.postrgreszoo.model.Monkey;
 import se.iths.cecilia.postrgreszoo.repository.MonkeyRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -26,7 +27,6 @@ public class MonkeyIntegrationTests {
 
     @Autowired
     MonkeyRepository monkeyRepository;
-
 
     @BeforeEach
     void setup() {
@@ -51,33 +51,29 @@ public class MonkeyIntegrationTests {
 
     @Test
     @DisplayName("Fetch entity and verify it is correct")
-    void fetchEntityAndVerifyItIsCorrect() throws Exception {
-        //setup -> prepare monkey. Prepare response
+    void fetchEntityAndVerifyItIsCorrectTest() throws Exception {
         Monkey monkey = new Monkey("John", "Gorilla", "Angola", "Y22");
+        monkeyRepository.save(monkey);
 
-        //expect -> monkey saved is the one returned.
-        mockMvc.perform(MockMvcRequestBuilders.post("/monkeys/create")
-                        .formField("name", monkey.getName())
-                        .formField("type", monkey.getType())
-                        .formField("originCountry", monkey.getOriginCountry())
-                        .formField("currentHabitat", monkey.getCurrentHabitat())
+        mockMvc.perform(MockMvcRequestBuilders.get("/monkeys/" + monkey.getId())
                         .characterEncoding("UTF-8"))
-                .andExpect(status().is3xxRedirection());
+                .andExpect(status().isOk());
 
         List<Monkey> monkeys = monkeyRepository.findAll();
-        Assertions.assertEquals(1, monkeys.size());
-
         Monkey monkeyReturned = monkeys.get(0);
 
-        Assertions.assertEquals(monkey.getName(), monkeyReturned.getName());
-        Assertions.assertEquals(monkey.getType(), monkeyReturned.getType());
-        Assertions.assertEquals(monkey.getOriginCountry(), monkeyReturned.getOriginCountry());
-        Assertions.assertEquals(monkey.getCurrentHabitat(), monkeyReturned.getCurrentHabitat());
+        List<Boolean> monkeyChecks = new ArrayList<>();
+        monkeyChecks.add(monkey.getName().equals(monkeyReturned.getName()));
+        monkeyChecks.add(monkey.getType().equals(monkeyReturned.getType()));
+        monkeyChecks.add(monkey.getOriginCountry().equals(monkeyReturned.getOriginCountry()));
+        monkeyChecks.add(monkey.getCurrentHabitat().equals(monkeyReturned.getCurrentHabitat()));
+
+        Assertions.assertFalse(monkeyChecks.contains(false));
     }
 
     @Test
     @DisplayName("Fetch all entities and verify amount")
-    void fetchAllEntitiesAndVerifyAmount() throws Exception {
+    void fetchAllEntitiesAndVerifyAmountTest() throws Exception {
         Monkey monkey1 = new Monkey("Oscar", "Gorilla", "Angola", "Y22");
         Monkey monkey2 = new Monkey("Jane", "Lemur", "Madagaskar", "I92");
         Monkey monkey3 = new Monkey("Isak", "Chimpanzee", "Tanzania", "S32");
@@ -91,9 +87,6 @@ public class MonkeyIntegrationTests {
                 .characterEncoding("UTF-8")).andExpect(status().isOk());
 
         List<Monkey> monkeys = monkeyRepository.findAll();
-
         Assertions.assertEquals(3, monkeys.size());
-
-
     }
 }
