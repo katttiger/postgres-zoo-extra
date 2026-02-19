@@ -10,7 +10,7 @@
     </parent>
     <groupId>se.iths.cecilia</groupId>
     <artifactId>postrgres-zoo</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.0-SNAPSHOT</version>
     <name>postrgres-zoo</name>
     <description>postrgres-zoo</description>
     <url/>

@@ -1,4 +1,4 @@
-package se.iths.cecilia.postrgreszoo.exception.monkeyexceptions;
+package se.iths.cecilia.postrgreszoo.exception;
 
 public class MonkeyNameIsNullException extends RuntimeException {
     public MonkeyNameIsNullException(String message) {

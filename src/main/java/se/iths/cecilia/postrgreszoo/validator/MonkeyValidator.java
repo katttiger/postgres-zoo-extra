@@ -1,7 +1,7 @@
 package se.iths.cecilia.postrgreszoo.validator;
 
 import org.springframework.stereotype.Component;
-import se.iths.cecilia.postrgreszoo.exception.monkeyexceptions.*;
+import se.iths.cecilia.postrgreszoo.exception.*;
 import se.iths.cecilia.postrgreszoo.model.Monkey;
 
 @Component

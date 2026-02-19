@@ -9,7 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import se.iths.cecilia.postrgreszoo.exception.monkeyexceptions.*;
+import se.iths.cecilia.postrgreszoo.exception.*;
 import se.iths.cecilia.postrgreszoo.model.Monkey;
 import se.iths.cecilia.postrgreszoo.repository.MonkeyRepository;
 import se.iths.cecilia.postrgreszoo.validator.MonkeyValidator;
