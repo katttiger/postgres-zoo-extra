@@ -1,4 +1,4 @@
-package se.iths.cecilia.postrgreszoo.exception.monkeyexceptions;
+package se.iths.cecilia.postrgreszoo.exception;
 
 public class MonkeyHasNoCountryOfOriginException extends RuntimeException {
     public MonkeyHasNoCountryOfOriginException(String message) {

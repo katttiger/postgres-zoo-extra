@@ -1,4 +1,4 @@
-package se.iths.cecilia.postrgreszoo.exception.monkeyexceptions;
+package se.iths.cecilia.postrgreszoo.exception;
 
 public class MonkeyHasNoTypeException extends RuntimeException {
     public MonkeyHasNoTypeException(String message) {

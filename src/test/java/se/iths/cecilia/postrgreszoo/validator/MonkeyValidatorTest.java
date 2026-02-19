@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import se.iths.cecilia.postrgreszoo.exception.monkeyexceptions.*;
+import se.iths.cecilia.postrgreszoo.exception.*;
 import se.iths.cecilia.postrgreszoo.model.Monkey;
 
 class MonkeyValidatorTest {
